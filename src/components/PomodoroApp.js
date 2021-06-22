@@ -10,10 +10,10 @@ const PomodoroApp = () => {
     <main>
       <h1>Pomodoro clock</h1>
 
-      <section className='flexRow'>
+      <div className='flexRow'>
         <BreakSettings />
         <SessionSettings />
-      </section>
+      </div>
 
       <section className='container flexColumn'>
         <h2 id='timer-label'>Session</h2>
@@ -22,10 +22,10 @@ const PomodoroApp = () => {
           {minutes}:{seconds}
         </div>
 
-        <section className='flexRow startStopContainer'>
+        <div className='container flexRow'>
           <button id='start_stop'>{'Start'}</button>
           <button id='reset'>Reset</button>
-        </section>
+        </div>
       </section>
     </main>
   );
