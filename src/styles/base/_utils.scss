@@ -1,0 +1,16 @@
+// Flex mixin to save time
+@mixin flex($flex-direction) {
+  display: flex;
+  flex-direction: $flex-direction;
+  justify-content: center;
+  align-items: center;
+}
+
+// Flex classes to quickly implement flexbox to any element/container
+.flexRow {
+  @include flex(row);
+}
+
+.flexColumn {
+  @include flex(column);
+}

@@ -1,12 +1,37 @@
+@import './base/settings';
+@import './base/utils';
+
+// General styles
 * {
   box-sizing: border-box;
   overflow: hidden;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  font-size: 62.5%;
 }
 
 body {
+  @include flex(row);
+
   height: 100vh;
   font-family: 'Roboto', sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  font-size: $m-size;
+}
+
+// Other specific styles
+h1 {
+  text-align: center;
+  margin-bottom: $m-size;
+}
+
+.container {
+  margin: $s-size;
+}
+
+button {
+  padding: 0.5rem $s-size;
+  margin: $s-size;
 }
