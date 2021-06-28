@@ -1,6 +1,14 @@
 import React from 'react';
 
-const Session = ({ name, minutes, seconds, onClick, isRunning }) => {
+const Session = ({
+  name,
+  minutes,
+  seconds,
+  handleStartStop,
+  isRunning,
+  secondInterval,
+  minuteInterval
+}) => {
   return (
     <div id='time-left' className='container flexColumn'>
       <h2 id='timer-label'>{name}</h2>
@@ -12,12 +20,20 @@ const Session = ({ name, minutes, seconds, onClick, isRunning }) => {
         <button
           id='start_stop'
           onClick={() => {
-            onClick(minutes);
+            handleStartStop(minutes);
           }}
         >
           {!isRunning ? 'Start' : 'Pause'}
         </button>
-        <button id='reset'>Reset</button>
+        <button
+          id='reset'
+          onClick={() => {
+            clearInterval(secondInterval);
+            clearInterval(minuteInterval);
+          }}
+        >
+          Reset
+        </button>
       </div>
     </div>
   );

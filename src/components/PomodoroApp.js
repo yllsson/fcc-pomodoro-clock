@@ -11,42 +11,34 @@ const PomodoroApp = () => {
   const [sessionName, setSessionName] = useState('Session');
   // const [sessionName, setSessionName] = useState('Break');
 
-  let interval;
-
   const second = 1000;
   const minute = second * 60;
   const hour = minute * 60;
-
-  const getTime = (length) => {
-    const date = new Date().getTime();
-    const goalTime = date + length * minute;
-    const gap = goalTime - date;
-    const textMinutes = Math.floor((gap % hour) / minute);
-    const textSeconds = Math.floor((gap % minute) / second);
-    setMinutes(textMinutes);
-    if (textSeconds < 10) {
-      setSeconds(`0${textSeconds}`);
-    } else {
-      setSeconds(textSeconds);
-    }
-    console.log(date, goalTime, gap, textMinutes, textSeconds, isRunning);
-  };
+  let secondInterval;
+  let minuteInterval;
 
   // handleStartStop should start or pause the timer
-  const handleStartStop = (length) => {
-    getTime(length);
+  const handleStartStop = () => {
+    // const now = new Date().toDateString;
 
+    // this is all bs, why isn't this working??
     if (isRunning) {
       setIsRunning(false);
+      console.log(minutes, 'seconds are:', seconds, isRunning);
+      clearInterval(secondInterval);
     } else {
       setIsRunning(true);
+      console.log(minutes, 'seconds are:', seconds, isRunning);
+      secondInterval = setInterval(
+        setSeconds((prevSeconds) => prevSeconds - 1),
+        1000
+      );
+      minuteInterval = setInterval(
+        setMinutes((prevMinutes) => prevMinutes - 1),
+        60000
+      );
     }
   };
-
-  // updates minutes if sessionLength is adjusted
-  useEffect(() => {
-    setMinutes(sessionLength);
-  }, [sessionLength]);
 
   return (
     <main>
@@ -66,23 +58,15 @@ const PomodoroApp = () => {
       </div>
 
       <section className='container flexColumn'>
-        {sessionName === 'Session' ? (
-          <Session
-            name={sessionName}
-            seconds={seconds}
-            onClick={handleStartStop}
-            isRunning={isRunning}
-            minutes={sessionLength}
-          />
-        ) : (
-          <Session
-            name={sessionName}
-            seconds={seconds}
-            onClick={handleStartStop}
-            isRunning={isRunning}
-            minutes={breakLength}
-          />
-        )}
+        <Session
+          name={sessionName}
+          seconds={seconds}
+          handleStartStop={handleStartStop}
+          isRunning={isRunning}
+          minutes={minutes}
+          secondInterval={secondInterval}
+          minuteInterval={minuteInterval}
+        />
       </section>
     </main>
   );
