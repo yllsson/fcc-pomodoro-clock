@@ -23,25 +23,27 @@ const PomodoroApp = () => {
     setSeconds(textSeconds);
     console.log(date, goalTime, gap, textMinutes, textSeconds);
 
-    let interval;
+    // let interval;
 
-    if (isRunning) {
-      clearInterval(interval);
-      setIsRunning(false);
-    } else {
-      setIsRunning(true);
+    // if (!isRunning) {
+    //   setIsRunning(true);
 
-      interval = setInterval(() => {
-        setMinutes((prevMinutes) => {
-          prevMinutes - 1;
-        });
-        setSeconds((prevSeconds) => {
-          prevSeconds - 1;
-        });
+    //   interval = setInterval(() => {
+    //     setMinutes((prevMinutes) => {
+    //       prevMinutes - 1;
+    //     });
+    //     setSeconds((prevSeconds) => {
+    //       prevSeconds - 1;
+    //     });
 
-        console.log(textMinutes, textSeconds);
-      }, 1000);
-    }
+    //     console.log(minutes, seconds, isRunning);
+    //   }, 1000);
+    // } else {
+    //   console.log(minutes, seconds, isRunning);
+
+    //   setIsRunning(false);
+    //   return clearInterval(interval);
+    // }
   };
 
   return (
