@@ -19,9 +19,11 @@ const Settings = ({ name, length, setLength }) => {
         <button id={`${name}-decrement`} onClick={decrementLength}>
           -
         </button>
+
         <div className={`${name}Display`} id={`${name}-length`}>
           {length}
         </div>
+
         <button id={`${name}-increment`} onClick={incrementLength}>
           +
         </button>
