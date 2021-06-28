@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Settings from './Settings';
-import SessionSettings from './SessionSettings';
 
 const PomodoroApp = () => {
   const [minutes, setMinutes] = useState('00');
@@ -13,8 +12,16 @@ const PomodoroApp = () => {
       <h1>Pomodoro clock</h1>
 
       <div className='flexRow'>
-        <Settings name={'break'} length={breakLength}/>
-        <Settings name={'session'} length={sessionLength}/>
+        <Settings
+          name={'break'}
+          length={breakLength}
+          setLength={setBreakLength}
+        />
+        <Settings
+          name={'session'}
+          length={sessionLength}
+          setLength={setSessionLength}
+        />
       </div>
 
       <section className='container flexColumn'>

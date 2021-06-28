@@ -1,16 +1,30 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-const Settings = ({name, length}) => {
+const Settings = ({ name, length, setLength }) => {
+  const incrementLength = () => {
+    setLength((prevLength) => prevLength + 1);
+  };
+
+  const decrementLength = () => {
+    setLength((prevLength) => prevLength - 1);
+  };
+
   return (
     <section className='container flexColumn'>
-      <h2 id={`${name}-label`}>{name.charAt(0).toUpperCase() + name.slice(1)} Length</h2>
+      <h2 id={`${name}-label`}>
+        {name.charAt(0).toUpperCase() + name.slice(1)} Length
+      </h2>
 
       <div className='container flexRow'>
-        <button id={`${name}-decrement`}>-</button>
+        <button id={`${name}-decrement`} onClick={decrementLength}>
+          -
+        </button>
         <div className={`${name}Display`} id={`${name}-length`}>
           {length}
         </div>
-        <button id={`${name}-increment`}>+</button>
+        <button id={`${name}-increment`} onClick={incrementLength}>
+          +
+        </button>
       </div>
     </section>
   );
