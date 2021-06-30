@@ -27,10 +27,6 @@ const PomodoroApp = () => {
   const handleStartStop = () => {
     setIsRunning((prevState) => !prevState);
 
-    // if (didMount && seconds === 0) {
-    //   setSeconds(59);
-    // }
-
     if (!isRunning) {
       setLoop(startInterval());
     } else {
