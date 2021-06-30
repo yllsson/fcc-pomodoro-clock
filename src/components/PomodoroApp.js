@@ -6,8 +6,8 @@ const PomodoroApp = () => {
   const [breakLength, setBreakLength] = useState(5);
   const [sessionLength, setSessionLength] = useState(25);
   const [isRunning, setIsRunning] = useState(false);
-  const [minutes, setMinutes] = useState('00');
-  const [seconds, setSeconds] = useState('00');
+  const [minutes, setMinutes] = useState(25);
+  const [seconds, setSeconds] = useState(0);
   const [sessionName, setSessionName] = useState('Session');
   // const [sessionName, setSessionName] = useState('Break');
 
@@ -19,26 +19,33 @@ const PomodoroApp = () => {
 
   // handleStartStop should start or pause the timer
   const handleStartStop = () => {
-    // const now = new Date().toDateString;
-
-    // this is all bs, why isn't this working??
-    if (isRunning) {
-      setIsRunning(false);
-      console.log(minutes, 'seconds are:', seconds, isRunning);
-      clearInterval(secondInterval);
-    } else {
-      setIsRunning(true);
-      console.log(minutes, 'seconds are:', seconds, isRunning);
-      secondInterval = setInterval(
-        setSeconds((prevSeconds) => prevSeconds - 1),
-        1000
-      );
-      minuteInterval = setInterval(
-        setMinutes((prevMinutes) => prevMinutes - 1),
-        60000
-      );
-    }
+    setIsRunning((prevState) => !prevState);
   };
+
+  const decrementSeconds = () => {
+    setSeconds((prevSeconds) => prevSeconds - 1);
+    console.log('minutes are:', minutes, 'seconds are:', seconds, isRunning);
+  };
+  const decrementMinutes = () => {
+    // setSeconds(59)
+    setMinutes((prevMinutes) => prevMinutes - 1);
+  };
+
+  // tried to make it so this useEffect triggers the interval as soon as the handleStartStop flicks the "isRunning" on or off. But this still doesn't work so need other solution.
+  useEffect(() => {
+    if (seconds === 0) {
+      setSeconds(59);
+    }
+
+    if (isRunning) {
+      console.log('clearing intervals');
+      clearInterval(secondInterval);
+      clearInterval(minuteInterval);
+    } else {
+      secondInterval = setInterval(decrementSeconds, 1000);
+      minuteInterval = setInterval(decrementMinutes, 60000);
+    }
+  }, [isRunning]);
 
   return (
     <main>
