@@ -3,7 +3,7 @@ import Settings from './Settings';
 // import Session from './Session';
 
 const PomodoroApp = () => {
-  const [didMount, setDidMount] = useState(false);
+  // const [didMount, setDidMount] = useState(false);
   const [breakLength, setBreakLength] = useState(5);
   const [sessionLength, setSessionLength] = useState(25);
   const [minutes, setMinutes] = useState(25);
@@ -27,9 +27,9 @@ const PomodoroApp = () => {
   const handleStartStop = () => {
     setIsRunning((prevState) => !prevState);
 
-    if (didMount && seconds === 0) {
-      setSeconds(59);
-    }
+    // if (didMount && seconds === 0) {
+    //   setSeconds(59);
+    // }
 
     if (!isRunning) {
       setLoop(startInterval());
@@ -38,7 +38,7 @@ const PomodoroApp = () => {
     }
   };
 
-  useEffect(() => setDidMount(true), []);
+  // useEffect(() => setDidMount(true), []);
 
   return (
     <main>
@@ -61,7 +61,11 @@ const PomodoroApp = () => {
         <h2 id='timer-label'>{sessionName}</h2>
         <p id='time-left'>
           {minutes < 10 ? `0${minutes}` : minutes}:
-          {seconds < 10 ? `0${seconds}` : seconds}
+          {seconds < 0
+            ? setSeconds(59)
+            : seconds < 10
+            ? `0${seconds}`
+            : seconds}
         </p>
 
         <div className='container flexRow'>
