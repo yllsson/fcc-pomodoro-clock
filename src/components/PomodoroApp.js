@@ -19,15 +19,22 @@ const PomodoroApp = () => {
     }, 1000);
   };
 
+  const stopInterval = () => {
+    console.log('cleaning');
+    clearInterval(loop);
+  };
+
   const handleStartStop = () => {
     setIsRunning((prevState) => !prevState);
 
+    if (didMount && seconds === 0) {
+      setSeconds(59);
+    }
+
     if (!isRunning) {
-      console.log(isRunning);
       setLoop(startInterval());
     } else {
-      console.log('cleaning');
-      clearInterval(loop);
+      stopInterval();
     }
   };
 
@@ -35,9 +42,7 @@ const PomodoroApp = () => {
 
   /* this allows seconds to turn to 59 as soon as the timer kicks off, but it also makes seconds 59 on reset, so that's still an issue */
   // useEffect(() => {
-  //   if (didMount && seconds === 0) {
-  //     setSeconds(59);
-  //   }
+
   // }, [seconds]);
 
   return (
@@ -77,9 +82,11 @@ const PomodoroApp = () => {
             id='reset'
             onClick={() => {
               setMinutes(25);
+              setSeconds(0);
               setSessionLength(25);
               setBreakLength(5);
-              setSeconds(0);
+              stopInterval();
+              setIsRunning(false);
             }}
           >
             Reset
