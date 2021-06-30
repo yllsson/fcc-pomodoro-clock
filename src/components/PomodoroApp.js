@@ -40,11 +40,6 @@ const PomodoroApp = () => {
 
   useEffect(() => setDidMount(true), []);
 
-  /* this allows seconds to turn to 59 as soon as the timer kicks off, but it also makes seconds 59 on reset, so that's still an issue */
-  // useEffect(() => {
-
-  // }, [seconds]);
-
   return (
     <main>
       <h1>Pomodoro clock</h1>
