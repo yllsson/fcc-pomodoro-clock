@@ -4,14 +4,22 @@ import Settings from './Settings';
 
 const PomodoroApp = () => {
   // const [didMount, setDidMount] = useState(false);
-  const [breakLength, setBreakLength] = useState(5);
-  const [sessionLength, setSessionLength] = useState(25);
+  const [breakLength, setBreakLength] = useState(5 * 60);
+  const [sessionLength, setSessionLength] = useState(25 * 60);
   const [minutes, setMinutes] = useState(25);
   const [seconds, setSeconds] = useState(3);
   const [sessionName, setSessionName] = useState('Session');
   // const [sessionName, setSessionName] = useState('Break');
   const [isRunning, setIsRunning] = useState(false);
   const [loop, setLoop] = useState();
+
+  const formatTime = (timeInSeconds) => {
+    const mins = timeInSeconds / 60;
+    const secs = timeInSeconds % 60;
+    return (
+      (mins < 10 ? `0${mins}` : mins) + ':' + (secs < 10 ? `0${secs}` : secs)
+    );
+  };
 
   const startInterval = () => {
     return setInterval(() => {
@@ -55,14 +63,7 @@ const PomodoroApp = () => {
 
       <section className='container flexColumn'>
         <h2 id='timer-label'>{sessionName}</h2>
-        <p id='time-left'>
-          {minutes < 10 ? `0${minutes}` : minutes}:
-          {seconds < 0
-            ? setSeconds(59)
-            : seconds < 10
-            ? `0${seconds}`
-            : seconds}
-        </p>
+        <p id='time-left'>{formatTime(sessionLength)}</p>
 
         <div className='container flexRow'>
           <button
