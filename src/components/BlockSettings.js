@@ -8,12 +8,12 @@ const BlockSettings = ({ name, length, setLength, setBlockLength }) => {
   };
   const incrementLength = () => {
     setLength((prevLength) => prevLength + 1);
-    setBlockLength((prevLength) => prevLength + 1);
+    setBlockLength((prevLength) => prevLength + 60);
   };
 
   const decrementLength = () => {
     setLength((prevLength) => prevLength - 1);
-    setBlockLength((prevLength) => prevLength - 1);
+    setBlockLength((prevLength) => prevLength - 60);
   };
 
   return (

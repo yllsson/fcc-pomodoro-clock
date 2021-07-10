@@ -5,58 +5,61 @@ import BlockSettings from './BlockSettings';
 const PomodoroApp = () => {
   const [breakLength, setBreakLength] = useState(5);
   const [sessionLength, setSessionLength] = useState(25);
+  const [blockLength, setBlockLength] = useState(25 * 60);
 
-  const [blockLength, setBlockLength] = useState(25);
-  // to be replaced by blockLength?
-  const [minutes, setMinutes] = useState(25 * 60);
-  const [seconds, setSeconds] = useState(3);
+  const [isRunning, setIsRunning] = useState(false);
+  const [onBreak, setOnBreak] = useState(false);
 
   const [sessionName, setSessionName] = useState('Session');
   // const [sessionName, setSessionName] = useState('Break');
 
-  // related to interval
-  const [isRunning, setIsRunning] = useState(false);
-  const [loop, setLoop] = useState();
-
   const formatTime = (length) => {
-    const timeInSeconds = length * 60;
-    const mins = timeInSeconds / 60;
-    const secs = timeInSeconds % 60;
+    const mins = Math.floor(length / 60);
+    const secs = length % 60;
     return (
       (mins < 10 ? `0${mins}` : mins) + ':' + (secs < 10 ? `0${secs}` : secs)
     );
   };
 
-  const startInterval = () => {
-    return setInterval(() => {
-      setSeconds((prevState) => prevState - 1);
-    }, 1000);
+  const runTimer = () => {
+    const second = 1000;
+    let now = new Date().getTime();
+    let then = new Date().getTime() + second;
+    let isOnBreak = onBreak;
+
+    if (!isRunning) {
+      let interval = setInterval(() => {
+        now = new Date();
+        now = now.getTime();
+
+        if (now > then) {
+          console.log(blockLength);
+
+          setBlockLength((prevState) => prevState - 1);
+          then += second;
+        }
+      }, 30);
+      localStorage.clear();
+      localStorage.setItem('interval-id', interval);
+    } else {
+      stopInterval();
+    }
+
+    setIsRunning(!isRunning);
   };
 
   const stopInterval = () => {
     console.log('cleaning');
-    clearInterval(loop);
+    clearInterval(localStorage.getItem('interval-id'));
   };
-
-  const handleStartStop = () => {
-    setIsRunning((prevState) => !prevState);
-
-    if (!isRunning) {
-      setLoop(startInterval());
-    } else {
-      stopInterval();
-    }
-  };
-
-  // need something to swap sessionName from break to session when timer hits 0
 
   useEffect(() => {
     // do I need if statement for isRunning? if the useEffect watches for sessionName to change, it won't actually reset the blockLength until the timer hits 0...
     // if (!isRunning) {
     if (sessionName === 'Session') {
-      setBlockLength(sessionLength);
+      setBlockLength(sessionLength * 60);
     } else if (sessionName === 'Break') {
-      setBlockLength(breakLength);
+      setBlockLength(breakLength * 60);
     }
     // }
   }, [sessionName]);
@@ -91,7 +94,7 @@ const PomodoroApp = () => {
           <button
             id='start_stop'
             onClick={() => {
-              handleStartStop();
+              runTimer();
             }}
           >
             {!isRunning ? 'Start' : 'Pause'}
