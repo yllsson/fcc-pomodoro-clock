@@ -3,7 +3,7 @@ import BlockDisplay from './BlockDisplay';
 import BlockSettings from './BlockSettings';
 
 const PomodoroApp = () => {
-  const [breakLength, setBreakLength] = useState(1);
+  const [breakLength, setBreakLength] = useState(5);
   const [sessionLength, setSessionLength] = useState(25);
   const [blockLength, setBlockLength] = useState(25 * 60);
 
@@ -63,16 +63,16 @@ const PomodoroApp = () => {
     clearInterval(localStorage.getItem('interval-id'));
   };
 
-  useEffect(() => {
-    // do I need if statement for isRunning? if the useEffect watches for sessionName to change, it won't actually reset the blockLength until the timer hits 0...
-    // if (!isRunning) {
-    if (sessionName === 'Session') {
-      setBlockLength(sessionLength * 60);
-    } else if (sessionName === 'Break') {
-      setBlockLength(breakLength * 60);
-    }
-    // }
-  }, [sessionName]);
+  // useEffect(() => {
+  //   // do I need if statement for isRunning? if the useEffect watches for sessionName to change, it won't actually reset the blockLength until the timer hits 0...
+  //   // if (!isRunning) {
+  //   if (sessionName === 'Session') {
+  //     setBlockLength(sessionLength * 60);
+  //   } else if (sessionName === 'Break') {
+  //     setBlockLength(breakLength * 60);
+  //   }
+  //   // }
+  // }, [sessionName]);
 
   return (
     <main>
