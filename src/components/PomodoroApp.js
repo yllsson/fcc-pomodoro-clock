@@ -1,18 +1,31 @@
 import React, { useState, useEffect } from 'react';
+import BlockDisplay from './BlockDisplay';
 import Settings from './Settings';
 
 const PomodoroApp = () => {
-  // const [didMount, setDidMount] = useState(false);
-  const [breakLength, setBreakLength] = useState(5 * 60);
-  const [sessionLength, setSessionLength] = useState(25 * 60);
-  // const [minutes, setMinutes] = useState(25);
-  // const [seconds, setSeconds] = useState(3);
+  const [breakLength, setBreakLength] = useState(5);
+  const [sessionLength, setSessionLength] = useState(25);
+
+  const [blockLength, setBlockLength] = useState(25);
+  // to be replaced by blockLength?
+  const [minutes, setMinutes] = useState(25 * 60);
+  const [seconds, setSeconds] = useState(3);
+
   const [sessionName, setSessionName] = useState('Session');
   // const [sessionName, setSessionName] = useState('Break');
+
+  // related to interval
   const [isRunning, setIsRunning] = useState(false);
   const [loop, setLoop] = useState();
 
-  const formatTime = (timeInSeconds) => {
+  const formatBlockLength = (blockLength) => {
+    const timeInSeconds = blockLength * 60;
+    const mins = timeInSeconds / 60;
+    return mins;
+  };
+
+  const formatTime = (length) => {
+    const timeInSeconds = length * 60;
     const mins = timeInSeconds / 60;
     const secs = timeInSeconds % 60;
     return (
@@ -41,7 +54,18 @@ const PomodoroApp = () => {
     }
   };
 
-  // useEffect(() => setDidMount(true), []);
+  // need something to swap sessionName from break to session when timer hits 0
+
+  useEffect(() => {
+    // do I need if statement for isRunning? if the useEffect watches for sessionName to change, it won't actually reset the blockLength until the timer hits 0...
+    // if (!isRunning) {
+    if (sessionName === 'Session') {
+      setBlockLength(sessionLength);
+    } else if (sessionName === 'Break') {
+      setBlockLength(breakLength);
+    }
+    // }
+  }, [sessionName]);
 
   return (
     <main>
@@ -52,19 +76,22 @@ const PomodoroApp = () => {
           name={'break'}
           length={breakLength}
           setLength={setBreakLength}
-          formatTime={formatTime}
+          formatBlockLength={formatBlockLength}
         />
         <Settings
           name={'session'}
           length={sessionLength}
           setLength={setSessionLength}
-          formatTime={formatTime}
+          formatBlockLength={formatBlockLength}
         />
       </div>
 
       <section className='container flexColumn'>
-        <h2 id='timer-label'>{sessionName}</h2>
-        <p id='time-left'>{formatTime(sessionLength)}</p>
+        <BlockDisplay
+          formatTime={formatTime}
+          blockLength={blockLength}
+          sessionName={sessionName}
+        />
 
         <div className='container flexRow'>
           <button
