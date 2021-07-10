@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import Settings from './Settings';
-// import Session from './Session';
 
 const PomodoroApp = () => {
   // const [didMount, setDidMount] = useState(false);
   const [breakLength, setBreakLength] = useState(5 * 60);
   const [sessionLength, setSessionLength] = useState(25 * 60);
-  const [minutes, setMinutes] = useState(25);
-  const [seconds, setSeconds] = useState(3);
+  // const [minutes, setMinutes] = useState(25);
+  // const [seconds, setSeconds] = useState(3);
   const [sessionName, setSessionName] = useState('Session');
   // const [sessionName, setSessionName] = useState('Break');
   const [isRunning, setIsRunning] = useState(false);
@@ -53,11 +52,13 @@ const PomodoroApp = () => {
           name={'break'}
           length={breakLength}
           setLength={setBreakLength}
+          formatTime={formatTime}
         />
         <Settings
           name={'session'}
           length={sessionLength}
           setLength={setSessionLength}
+          formatTime={formatTime}
         />
       </div>
 
@@ -78,7 +79,6 @@ const PomodoroApp = () => {
             id='reset'
             onClick={() => {
               setMinutes(25);
-              setSeconds(0);
               setSessionLength(25);
               setBreakLength(5);
               stopInterval();

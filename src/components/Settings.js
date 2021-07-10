@@ -1,12 +1,12 @@
 import React from 'react';
 
-const Settings = ({ name, length, setLength }) => {
+const Settings = ({ name, length, setLength, formatTime }) => {
   const incrementLength = () => {
-    setLength((prevLength) => prevLength + 1);
+    setLength((prevLength) => prevLength + 1 * 60);
   };
 
   const decrementLength = () => {
-    setLength((prevLength) => prevLength - 1);
+    setLength((prevLength) => prevLength - 1 * 60);
   };
 
   return (
@@ -21,7 +21,7 @@ const Settings = ({ name, length, setLength }) => {
         </button>
 
         <div className={`${name}Display`} id={`${name}-length`}>
-          {length}
+          {formatTime(length)}
         </div>
 
         <button id={`${name}-increment`} onClick={incrementLength}>
