@@ -1,12 +1,19 @@
 import React from 'react';
 
-const Settings = ({ name, length, setLength, formatBlockLength }) => {
+const BlockSettings = ({ name, length, setLength, setBlockLength }) => {
+  const formatBlockLength = (length) => {
+    const timeInSeconds = length * 60;
+    const mins = timeInSeconds / 60;
+    return mins;
+  };
   const incrementLength = () => {
     setLength((prevLength) => prevLength + 1);
+    setBlockLength((prevLength) => prevLength + 1);
   };
 
   const decrementLength = () => {
     setLength((prevLength) => prevLength - 1);
+    setBlockLength((prevLength) => prevLength - 1);
   };
 
   return (
@@ -32,4 +39,4 @@ const Settings = ({ name, length, setLength, formatBlockLength }) => {
   );
 };
 
-export default Settings;
+export default BlockSettings;

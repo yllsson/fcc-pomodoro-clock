@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import BlockDisplay from './BlockDisplay';
-import Settings from './Settings';
+import BlockSettings from './BlockSettings';
 
 const PomodoroApp = () => {
   const [breakLength, setBreakLength] = useState(5);
@@ -17,12 +17,6 @@ const PomodoroApp = () => {
   // related to interval
   const [isRunning, setIsRunning] = useState(false);
   const [loop, setLoop] = useState();
-
-  const formatBlockLength = (blockLength) => {
-    const timeInSeconds = blockLength * 60;
-    const mins = timeInSeconds / 60;
-    return mins;
-  };
 
   const formatTime = (length) => {
     const timeInSeconds = length * 60;
@@ -72,17 +66,17 @@ const PomodoroApp = () => {
       <h1>Pomodoro clock</h1>
 
       <div className='flexRow'>
-        <Settings
+        <BlockSettings
           name={'break'}
           length={breakLength}
           setLength={setBreakLength}
-          formatBlockLength={formatBlockLength}
+          setBlockLength={setBlockLength}
         />
-        <Settings
+        <BlockSettings
           name={'session'}
           length={sessionLength}
           setLength={setSessionLength}
-          formatBlockLength={formatBlockLength}
+          setBlockLength={setBlockLength}
         />
       </div>
 
