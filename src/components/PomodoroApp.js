@@ -3,7 +3,7 @@ import BlockDisplay from './BlockDisplay';
 import BlockSettings from './BlockSettings';
 
 const PomodoroApp = () => {
-  const [breakLength, setBreakLength] = useState(5);
+  const [breakLength, setBreakLength] = useState(1);
   const [sessionLength, setSessionLength] = useState(25);
   const [blockLength, setBlockLength] = useState(25 * 60);
 
@@ -25,7 +25,6 @@ const PomodoroApp = () => {
     const second = 1000;
     let now = new Date().getTime();
     let then = new Date().getTime() + second;
-    let isOnBreak = onBreak;
 
     if (!isRunning) {
       let interval = setInterval(() => {
@@ -33,9 +32,20 @@ const PomodoroApp = () => {
         now = now.getTime();
 
         if (now > then) {
-          console.log(blockLength);
-
-          setBlockLength((prevState) => prevState - 1);
+          setBlockLength((prevState) => {
+            if (prevState <= 0 && !onBreak) {
+              setOnBreak(true);
+              setSessionName('Break');
+              // play audio
+              return breakLength * 60;
+            } else if (prevState <= 0 && onBreak) {
+              setOnBreak(false);
+              setSessionName('Session');
+              // play audio
+              return sessionLength * 60;
+            }
+            return prevState - 1;
+          });
           then += second;
         }
       }, 30);
@@ -102,11 +112,12 @@ const PomodoroApp = () => {
           <button
             id='reset'
             onClick={() => {
-              setMinutes(25);
               setSessionLength(25);
               setBreakLength(5);
               stopInterval();
               setIsRunning(false);
+              setBlockLength(25 * 60);
+              setSessionName('Session');
             }}
           >
             Reset
