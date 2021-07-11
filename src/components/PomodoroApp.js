@@ -3,9 +3,9 @@ import BlockDisplay from './BlockDisplay';
 import BlockSettings from './BlockSettings';
 
 const PomodoroApp = () => {
-  const [breakLength, setBreakLength] = useState(5);
-  const [sessionLength, setSessionLength] = useState(25);
-  const [blockLength, setBlockLength] = useState(25 * 60);
+  const [breakLength, setBreakLength] = useState(0.1);
+  const [sessionLength, setSessionLength] = useState(0.1);
+  const [blockLength, setBlockLength] = useState(0.1 * 60);
 
   const [isRunning, setIsRunning] = useState(false);
   const [onBreak, setOnBreak] = useState(false);
@@ -27,25 +27,11 @@ const PomodoroApp = () => {
     let then = new Date().getTime() + second;
 
     if (!isRunning) {
+      console.log('running');
       let interval = setInterval(() => {
-        now = new Date();
-        now = now.getTime();
-
+        now = new Date().getTime();
         if (now > then) {
-          setBlockLength((prevState) => {
-            if (prevState <= 0 && !onBreak) {
-              setOnBreak(true);
-              setSessionName('Break');
-              // play audio
-              return breakLength * 60;
-            } else if (prevState <= 0 && onBreak) {
-              setOnBreak(false);
-              setSessionName('Session');
-              // play audio
-              return sessionLength * 60;
-            }
-            return prevState - 1;
-          });
+          setBlockLength((prevState) => prevState - 1);
           then += second;
         }
       }, 30);
@@ -63,16 +49,31 @@ const PomodoroApp = () => {
     clearInterval(localStorage.getItem('interval-id'));
   };
 
-  // useEffect(() => {
-  //   // do I need if statement for isRunning? if the useEffect watches for sessionName to change, it won't actually reset the blockLength until the timer hits 0...
-  //   // if (!isRunning) {
-  //   if (sessionName === 'Session') {
-  //     setBlockLength(sessionLength * 60);
-  //   } else if (sessionName === 'Break') {
-  //     setBlockLength(breakLength * 60);
-  //   }
-  //   // }
-  // }, [sessionName]);
+  const reset = () => {
+    setSessionLength(25);
+    setBreakLength(5);
+    stopInterval();
+    setIsRunning(false);
+    setOnBreak(false);
+    setBlockLength(25 * 60);
+    setSessionName('Session');
+  };
+
+  useEffect(() => {
+    if (blockLength === 0 && !onBreak) {
+      console.log('Dingdingding, time for break');
+      setOnBreak(true);
+      setSessionName('Break');
+      setBlockLength(breakLength * 60);
+      console.log('going on break');
+    } else if (blockLength === 0 && onBreak) {
+      console.log('Dingdingding, time for session');
+      setOnBreak(false);
+      setSessionName('Session');
+      setBlockLength(sessionLength * 60);
+      console.log('going on session');
+    }
+  }, [blockLength]);
 
   return (
     <main>
@@ -84,12 +85,14 @@ const PomodoroApp = () => {
           length={breakLength}
           setLength={setBreakLength}
           setBlockLength={setBlockLength}
+          sessionName={sessionName}
         />
         <BlockSettings
           name={'session'}
           length={sessionLength}
           setLength={setSessionLength}
           setBlockLength={setBlockLength}
+          sessionName={sessionName}
         />
       </div>
 
@@ -97,7 +100,7 @@ const PomodoroApp = () => {
         <BlockDisplay
           formatTime={formatTime}
           blockLength={blockLength}
-          sessionName={sessionName}
+          onBreak={onBreak}
         />
 
         <div className='container flexRow'>
@@ -112,12 +115,7 @@ const PomodoroApp = () => {
           <button
             id='reset'
             onClick={() => {
-              setSessionLength(25);
-              setBreakLength(5);
-              stopInterval();
-              setIsRunning(false);
-              setBlockLength(25 * 60);
-              setSessionName('Session');
+              reset();
             }}
           >
             Reset

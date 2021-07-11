@@ -1,6 +1,12 @@
 import React from 'react';
 
-const BlockSettings = ({ name, length, setLength, setBlockLength }) => {
+const BlockSettings = ({
+  name,
+  length,
+  setLength,
+  setBlockLength,
+  sessionName
+}) => {
   const formatBlockLength = (length) => {
     const timeInSeconds = length * 60;
     const mins = timeInSeconds / 60;
@@ -9,14 +15,18 @@ const BlockSettings = ({ name, length, setLength, setBlockLength }) => {
   const incrementLength = () => {
     if (length <= 59) {
       setLength((prevLength) => prevLength + 1);
-      setBlockLength((prevLength) => prevLength + 60);
+      if (name === sessionName.toLowerCase()) {
+        setBlockLength((prevLength) => prevLength + 60);
+      }
     }
   };
 
   const decrementLength = () => {
     if (length >= 2) {
       setLength((prevLength) => prevLength - 1);
-      setBlockLength((prevLength) => prevLength - 60);
+      if (name === sessionName.toLowerCase()) {
+        setBlockLength((prevLength) => prevLength - 60);
+      }
     }
   };
 
