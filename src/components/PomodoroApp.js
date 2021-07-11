@@ -27,7 +27,6 @@ const PomodoroApp = () => {
     let then = new Date().getTime() + second;
 
     if (!isRunning) {
-      console.log('running');
       let interval = setInterval(() => {
         now = new Date().getTime();
         if (now > then) {
@@ -45,7 +44,6 @@ const PomodoroApp = () => {
   };
 
   const stopInterval = () => {
-    console.log('cleaning');
     clearInterval(localStorage.getItem('interval-id'));
   };
 
@@ -61,17 +59,15 @@ const PomodoroApp = () => {
 
   useEffect(() => {
     if (blockLength === 0 && !onBreak) {
-      console.log('Dingdingding, time for break');
       setOnBreak(true);
       setSessionName('Break');
       setBlockLength(breakLength * 60);
-      console.log('going on break');
+      // Play Audio!
     } else if (blockLength === 0 && onBreak) {
-      console.log('Dingdingding, time for session');
       setOnBreak(false);
       setSessionName('Session');
       setBlockLength(sessionLength * 60);
-      console.log('going on session');
+      // Play Audio!
     }
   }, [blockLength]);
 
