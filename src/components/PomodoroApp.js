@@ -5,9 +5,9 @@ import bipedibip from '../audio/bipedibip.mp3';
 
 const PomodoroApp = () => {
   // Timer lengths
-  const [breakLength, setBreakLength] = useState(0.1);
-  const [sessionLength, setSessionLength] = useState(0.1);
-  const [blockLength, setBlockLength] = useState(0.1 * 60);
+  const [breakLength, setBreakLength] = useState(5);
+  const [sessionLength, setSessionLength] = useState(25);
+  const [blockLength, setBlockLength] = useState(25 * 60);
 
   // Booleans
   const [isRunning, setIsRunning] = useState(false);
