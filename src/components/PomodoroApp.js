@@ -1,18 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import BlockDisplay from './BlockDisplay';
 import BlockSettings from './BlockSettings';
+import bipedibip from '../audio/bipedibip.mp3';
+import eeteeteet from '../audio/eeteeteet.mp3';
 
 const PomodoroApp = () => {
+  // Timer lengths
   const [breakLength, setBreakLength] = useState(0.1);
-  const [sessionLength, setSessionLength] = useState(0.1);
-  const [blockLength, setBlockLength] = useState(0.1 * 60);
+  const [sessionLength, setSessionLength] = useState(0.2);
+  const [blockLength, setBlockLength] = useState(0.2 * 60);
 
+  // Booleans
   const [isRunning, setIsRunning] = useState(false);
   const [onBreak, setOnBreak] = useState(false);
 
+  // Block name
   const [sessionName, setSessionName] = useState('Session');
-  // const [sessionName, setSessionName] = useState('Break');
 
+  // Formatting the timer
   const formatTime = (length) => {
     const mins = Math.floor(length / 60);
     const secs = length % 60;
@@ -21,6 +26,7 @@ const PomodoroApp = () => {
     );
   };
 
+  // Timer-related functions (runTimer, stopInterval, reset)
   const runTimer = () => {
     const second = 1000;
     let now = new Date().getTime();
@@ -38,6 +44,7 @@ const PomodoroApp = () => {
       localStorage.setItem('interval-id', interval);
     } else {
       stopInterval();
+      stopAudio();
     }
 
     setIsRunning(!isRunning);
@@ -55,19 +62,35 @@ const PomodoroApp = () => {
     setOnBreak(false);
     setBlockLength(25 * 60);
     setSessionName('Session');
+    stopAudio();
   };
 
+  // Audio-related functions (playAudio, stopAudio)
+  let audio = document.getElementById('bipedibip');
+
+  const playAudio = () => {
+    stopAudio();
+    audio.play();
+    setTimeout(stopAudio, 8000);
+  };
+
+  const stopAudio = () => {
+    audio.pause();
+    audio.currentTime = 0;
+  };
+
+  // State watcher/useEffect
   useEffect(() => {
     if (blockLength === 0 && !onBreak) {
       setOnBreak(true);
       setSessionName('Break');
       setBlockLength(breakLength * 60);
-      // Play Audio!
+      playAudio();
     } else if (blockLength === 0 && onBreak) {
       setOnBreak(false);
       setSessionName('Session');
       setBlockLength(sessionLength * 60);
-      // Play Audio!
+      playAudio();
     }
   }, [blockLength]);
 
@@ -117,6 +140,9 @@ const PomodoroApp = () => {
             Reset
           </button>
         </div>
+
+        <audio src={bipedibip} id='bipedibip'></audio>
+        <audio src={eeteeteet} id='eeteeteet'></audio>
       </section>
     </main>
   );
