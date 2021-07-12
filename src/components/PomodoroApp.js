@@ -2,13 +2,12 @@ import React, { useState, useEffect } from 'react';
 import BlockDisplay from './BlockDisplay';
 import BlockSettings from './BlockSettings';
 import bipedibip from '../audio/bipedibip.mp3';
-import eeteeteet from '../audio/eeteeteet.mp3';
 
 const PomodoroApp = () => {
   // Timer lengths
   const [breakLength, setBreakLength] = useState(0.1);
-  const [sessionLength, setSessionLength] = useState(0.2);
-  const [blockLength, setBlockLength] = useState(0.2 * 60);
+  const [sessionLength, setSessionLength] = useState(0.1);
+  const [blockLength, setBlockLength] = useState(0.1 * 60);
 
   // Booleans
   const [isRunning, setIsRunning] = useState(false);
@@ -16,6 +15,9 @@ const PomodoroApp = () => {
 
   // Block name
   const [sessionName, setSessionName] = useState('Session');
+
+  // audio file
+  const [audio, setAudio] = useState();
 
   // Formatting the timer
   const formatTime = (length) => {
@@ -66,12 +68,10 @@ const PomodoroApp = () => {
   };
 
   // Audio-related functions (playAudio, stopAudio)
-  let audio = document.getElementById('bipedibip');
-
   const playAudio = () => {
     stopAudio();
     audio.play();
-    setTimeout(stopAudio, 8000);
+    setTimeout(stopAudio, 9000);
   };
 
   const stopAudio = () => {
@@ -93,6 +93,10 @@ const PomodoroApp = () => {
       playAudio();
     }
   }, [blockLength]);
+
+  useEffect(() => {
+    setAudio(document.getElementById('beep'));
+  }, []);
 
   return (
     <main>
@@ -141,8 +145,7 @@ const PomodoroApp = () => {
           </button>
         </div>
 
-        <audio src={bipedibip} id='bipedibip'></audio>
-        <audio src={eeteeteet} id='eeteeteet'></audio>
+        <audio src={bipedibip} className='bipedibip' id='beep'></audio>
       </section>
     </main>
   );
