@@ -1,0 +1,21 @@
+button {
+  background-color: $primary-color;
+  border: 1.5px solid $border-color;
+  border-radius: 10px;
+  color: $text-color;
+  font-size: $m-size;
+  height: $xl-size;
+  margin: $s-size;
+  padding: 0.5rem $s-size;
+  width: $xxl-size;
+}
+
+.container.timer-buttons {
+  margin-top: $xxl-size;
+}
+
+.timer-button {
+  height: 5rem;
+  margin: $m-size $l-size;
+  width: 9rem;
+}
