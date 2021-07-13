@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import BlockDisplay from './BlockDisplay';
+import Timer from './Timer';
 import BlockSettings from './BlockSettings';
 import bipedibip from '../audio/bipedibip.mp3';
 
@@ -79,7 +79,7 @@ const PomodoroApp = () => {
     audio.currentTime = 0;
   };
 
-  // State watcher/useEffect
+  // State watchers/useEffects
   useEffect(() => {
     if (blockLength === 0 && !onBreak) {
       setOnBreak(true);
@@ -100,8 +100,6 @@ const PomodoroApp = () => {
 
   return (
     <main>
-      <h1>Pomodoro clock</h1>
-
       <div className='flexRow'>
         <BlockSettings
           name={'break'}
@@ -120,14 +118,18 @@ const PomodoroApp = () => {
       </div>
 
       <section className='container flexColumn'>
-        <BlockDisplay
-          formatTime={formatTime}
+        <Timer
           blockLength={blockLength}
+          formatTime={formatTime}
+          isRunning={isRunning}
           onBreak={onBreak}
+          runTimer={runTimer}
+          reset={reset}
         />
 
-        <div className='container flexRow'>
+        <div className='container flexRow timer-buttons'>
           <button
+            className='timer-button'
             id='start_stop'
             onClick={() => {
               runTimer();
@@ -136,6 +138,7 @@ const PomodoroApp = () => {
             {!isRunning ? 'Start' : 'Pause'}
           </button>
           <button
+            className='timer-button'
             id='reset'
             onClick={() => {
               reset();
@@ -144,9 +147,9 @@ const PomodoroApp = () => {
             Reset
           </button>
         </div>
-
-        <audio src={bipedibip} className='bipedibip' id='beep'></audio>
       </section>
+
+      <audio src={bipedibip} className='bipedibip' id='beep'></audio>
     </main>
   );
 };

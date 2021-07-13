@@ -31,7 +31,7 @@ const BlockSettings = ({
   };
 
   return (
-    <section className='container flexColumn'>
+    <section className='container flexColumn blockSettings'>
       <h2 id={`${name}-label`}>
         {name.charAt(0).toUpperCase() + name.slice(1)} Length
       </h2>
