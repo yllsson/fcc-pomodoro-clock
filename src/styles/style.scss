@@ -1,5 +1,7 @@
 @import './base/settings';
 @import './base/utils';
+@import './components/Timer';
+@import './components/BlockSettings';
 
 // General styles
 * {
@@ -16,9 +18,15 @@ html {
 body {
   @include flex(row);
 
+  background-color: $bg-color;
+  color: $text-color;
   height: 100vh;
   font-family: 'Roboto', sans-serif;
   font-size: $m-size;
+}
+
+main {
+  @include flex(column);
 }
 
 // Other specific styles
@@ -28,10 +36,5 @@ h1 {
 }
 
 .container {
-  margin: $s-size;
-}
-
-button {
-  padding: 0.5rem $s-size;
   margin: $s-size;
 }
