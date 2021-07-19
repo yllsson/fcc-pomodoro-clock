@@ -9,9 +9,11 @@
 }
 
 .label {
+  font-size: $xl-size;
   margin-bottom: $m-size;
 }
 
 .block-display-text {
-  font-size: $ml-size;
+  font-size: $l-size;
+  font-weight: bold;
 }

@@ -4,7 +4,9 @@ button {
   border-radius: 10px;
   box-shadow: 0.5px 0.5px 3px rgba(0, 0, 0, 0.2);
   color: $text-color;
-  font-size: $ml-size;
+  font-family: inherit;
+  font-size: $l-size;
+  // font-weight: bold;
   margin: 0 $s-size;
   padding: 0.5rem $s-size;
   width: 6rem;
@@ -17,15 +19,13 @@ button:hover {
 }
 
 button:active {
-  // background-color: $primary-color;
-  // border: 1.5px solid lighten($border-color, 5%);
-  // color: lighten($text-color, 15%);
   box-shadow: none;
   transform: scale(0.98);
 }
 
 .timer-button {
-  height: 5rem;
+  // height: 5rem;
   margin: 0 $m-size;
+  padding: $m-size;
   width: 20rem;
 }

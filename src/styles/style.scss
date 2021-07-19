@@ -3,6 +3,7 @@
 @import './components/Timer';
 @import './components/BlockSettings';
 @import './partials/button';
+@import url('https://fonts.googleapis.com/css2?family=Forum&family=Poiret+One&display=swap');
 
 // General styles
 * {
@@ -21,8 +22,10 @@ body {
 
   background-color: $bg-color;
   color: $text-color;
-  font-family: 'Roboto', sans-serif;
+  // font-family: 'Poiret One', cursive;
+  font-family: 'Forum', cursive;
   font-size: $m-size;
+  // font-weight: 300;
   height: 100vh;
 }
 

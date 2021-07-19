@@ -6,9 +6,9 @@ const Timer = ({ blockLength, formatTime, onBreak }) => {
       <h2 className='timer-label' id='timer-label'>
         {onBreak ? 'Break' : 'Session'}
       </h2>
-      <p className='time-left' id='time-left'>
+      <h2 className='time-left' id='time-left'>
         {formatTime(blockLength)}
-      </p>
+      </h2>
     </div>
   );
 };
