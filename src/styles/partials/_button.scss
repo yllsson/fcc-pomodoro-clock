@@ -11,17 +11,17 @@ button {
 }
 
 button:hover {
-  // background-color: lighten($border-color, 15%);
-  background-color: $accent-color;
+  background-color: lighten($text-color, 25%);
   color: $primary-color;
   border: none;
 }
 
 button:active {
   // background-color: $primary-color;
-  background-color: $accent-color;
   // border: 1.5px solid lighten($border-color, 5%);
+  // color: lighten($text-color, 15%);
   box-shadow: none;
+  transform: scale(0.98);
 }
 
 .timer-button {

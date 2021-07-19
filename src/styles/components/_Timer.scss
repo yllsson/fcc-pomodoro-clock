@@ -5,7 +5,8 @@
   border: 2px solid $border-color;
   border-radius: 50%;
   box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.2);
-
+  color: lighten($text-color, 5%);
+  color: $text-color;
   height: 40rem;
   margin-top: $xs-size;
   margin-bottom: $xxl-size;
@@ -13,11 +14,13 @@
 }
 
 .timer-label {
-  font-size: 5.2rem;
+  font-size: 5.4rem;
+  font-weight: normal;
   margin: $m-size;
 }
 
 .time-left {
-  font-size: 6.4rem;
+  font-size: 6rem;
+  font-weight: normal;
   margin: $m-size;
 }
