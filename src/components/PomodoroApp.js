@@ -100,7 +100,7 @@ const PomodoroApp = () => {
 
   return (
     <main>
-      <div className='flexRow'>
+      <div className='flexRow settingsContainer'>
         <BlockSettings
           name={'break'}
           length={breakLength}

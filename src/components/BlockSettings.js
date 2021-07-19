@@ -32,7 +32,7 @@ const BlockSettings = ({
 
   return (
     <section className='container flexColumn blockSettings'>
-      <h2 id={`${name}-label`}>
+      <h2 className='label' id={`${name}-label`}>
         {name.charAt(0).toUpperCase() + name.slice(1)} Length
       </h2>
 
@@ -41,7 +41,7 @@ const BlockSettings = ({
           -
         </button>
 
-        <div className={`${name}Display`} id={`${name}-length`}>
+        <div className='block-display-text' id={`${name}-length`}>
           {formatBlockLength(length)}
         </div>
 
