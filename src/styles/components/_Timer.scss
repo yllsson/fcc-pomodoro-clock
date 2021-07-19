@@ -1,18 +1,23 @@
 // Timer/BlockDisplay styles
 
-.timerContainer {
+.container .timerContainer {
   background-color: $primary-color;
-  border-radius: 50%;
-  width: 30rem;
-  height: 30rem;
   border: 2px solid $border-color;
+  border-radius: 50%;
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.2);
+
+  height: 40rem;
+  margin-top: $xs-size;
+  margin-bottom: $xxl-size;
+  width: 40rem;
 }
 
 .timer-label {
-  font-size: $xl-size;
-  margin: $m-size 0;
+  font-size: 5.2rem;
+  margin: $m-size;
 }
 
 .time-left {
-  font-size: $l-size;
+  font-size: 6.4rem;
+  margin: $m-size;
 }

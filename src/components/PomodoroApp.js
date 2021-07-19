@@ -121,29 +121,14 @@ const PomodoroApp = () => {
         <Timer
           blockLength={blockLength}
           formatTime={formatTime}
-          isRunning={isRunning}
           onBreak={onBreak}
-          runTimer={runTimer}
-          reset={reset}
         />
 
         <div className='container flexRow timer-buttons'>
-          <button
-            className='timer-button'
-            id='start_stop'
-            onClick={() => {
-              runTimer();
-            }}
-          >
+          <button className='timer-button' id='start_stop' onClick={runTimer}>
             {!isRunning ? 'Start' : 'Pause'}
           </button>
-          <button
-            className='timer-button'
-            id='reset'
-            onClick={() => {
-              reset();
-            }}
-          >
+          <button className='timer-button' id='reset' onClick={reset}>
             Reset
           </button>
         </div>

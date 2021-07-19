@@ -1,13 +1,6 @@
 import React from 'react';
 
-const Timer = ({
-  blockLength,
-  formatTime,
-  isRunning,
-  onBreak,
-  runTimer,
-  reset
-}) => {
+const Timer = ({ blockLength, formatTime, onBreak }) => {
   return (
     <div className='container flexColumn timerContainer'>
       <h2 className='timer-label' id='timer-label'>
