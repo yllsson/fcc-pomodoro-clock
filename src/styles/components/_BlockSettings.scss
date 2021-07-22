@@ -15,7 +15,7 @@
 }
 
 .block-display-text {
-  font-size: $l-size;
+  font-size: $ml-size;
   font-weight: bold;
   text-align: center;
   width: $xxl-size;
@@ -25,5 +25,10 @@
   .label {
     font-size: $xl-size;
     margin-bottom: $m-size;
+  }
+
+  .block-display-text {
+    font-size: $l-size;
+    width: $xxl-size;
   }
 }

@@ -6,7 +6,7 @@ button {
   color: $text-color;
   font-family: inherit;
   font-size: $ml-size;
-  margin: 0 $s-size;
+  margin: 0 $xs-size;
   padding: 0.5rem $s-size;
   width: 5rem;
 }
@@ -31,6 +31,7 @@ button:active {
 @media only screen and (min-width: $desktop-breakpoint) {
   button {
     font-size: $l-size;
+    margin: 0 $s-size;
     width: 6rem;
   }
 
