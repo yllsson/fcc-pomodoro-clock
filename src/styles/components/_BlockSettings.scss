@@ -6,10 +6,11 @@
 .blockSettings {
   width: 100%;
   height: auto;
+  margin: 0;
 }
 
 .label {
-  font-size: $xl-size;
+  font-size: $ml-size;
   margin-bottom: $m-size;
 }
 
@@ -18,4 +19,11 @@
   font-weight: bold;
   text-align: center;
   width: $xxl-size;
+}
+
+@media only screen and (min-width: $desktop-breakpoint) {
+  .label {
+    font-size: $xl-size;
+    margin-bottom: $m-size;
+  }
 }

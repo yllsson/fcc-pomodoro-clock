@@ -1,5 +1,4 @@
-// Timer/BlockDisplay styles
-
+// Timer styles
 .container .timerContainer {
   background-color: $primary-color;
   border: 2px solid $border-color;
@@ -7,20 +6,37 @@
   box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.2);
   color: lighten($text-color, 5%);
   color: $text-color;
-  height: 40rem;
+  height: 25rem;
   margin-top: $xs-size;
   margin-bottom: $xxl-size;
-  width: 40rem;
+  width: 25rem;
 }
 
 .timer-label {
-  font-size: 5.4rem;
-  // font-weight: 300;
-  margin: $m-size;
+  font-size: $xxl-size;
+  margin: $s-size;
 }
 
 .time-left {
-  font-size: 6rem;
-  // font-weight: 300;
-  margin: $m-size;
+  font-size: $xxl-size;
+  margin: $s-size;
+}
+
+@media only screen and (min-width: $desktop-breakpoint) {
+  .container .timerContainer {
+    height: 40rem;
+    margin-top: $xs-size;
+    margin-bottom: $xxl-size;
+    width: 40rem;
+  }
+
+  .timer-label {
+    font-size: 5.8rem;
+    margin: $m-size;
+  }
+
+  .time-left {
+    font-size: 5.8rem;
+    margin: $m-size;
+  }
 }
