@@ -8,7 +8,8 @@
     "serve": "live-server public/",
     "build": "webpack",
     "dev-server": "webpack serve",
-    "deploy": "gh-pages -d docs"
+    "deploy": "gh-pages -d docs",
+    "predeploy": "npm run build"
   },
   "author": "Ylva Turner",
   "license": "ISC",
