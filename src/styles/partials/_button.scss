@@ -31,7 +31,6 @@ button:active {
 @media only screen and (min-width: $desktop-breakpoint) {
   button {
     font-size: $l-size;
-    margin: 0 $s-size;
     width: 6rem;
   }
 
