@@ -1,44 +1,7 @@
-@import './base/settings';
 @import './base/utils';
+@import './base/settings';
+@import './general';
 @import './components/Timer';
 @import './components/BlockSettings';
 @import './partials/button';
 @import url('https://fonts.googleapis.com/css2?family=Poiret+One&display=swap');
-
-// General styles
-* {
-  box-sizing: border-box;
-  margin: 0;
-  overflow: hidden;
-  padding: 0;
-}
-
-html {
-  font-size: 62.5%;
-}
-
-body {
-  @include flex(row);
-
-  background-color: $bg-color;
-  color: $text-color;
-  font-family: 'Poiret One', cursive;
-  font-size: $m-size;
-  height: 100vh;
-}
-
-main {
-  @include flex(column);
-
-  width: 60rem;
-}
-
-// Other specific styles
-h1 {
-  text-align: center;
-  margin-bottom: $m-size;
-}
-
-.container {
-  margin: 0 $s-size;
-}

@@ -1,0 +1,35 @@
+// General styles
+* {
+  box-sizing: border-box;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  @include flex(row);
+
+  background-color: $bg-color;
+  color: $text-color;
+  font-family: 'Poiret One', cursive;
+  height: 100vh;
+}
+
+main {
+  @include flex(column);
+  padding: $m-size;
+}
+
+// Other specific styles
+h1 {
+  text-align: center;
+  margin-bottom: $m-size;
+}
+
+.container {
+  margin: 0 $s-size;
+}
