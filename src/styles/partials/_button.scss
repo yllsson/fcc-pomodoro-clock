@@ -6,9 +6,10 @@ button {
   color: $text-color;
   font-family: inherit;
   font-size: $ml-size;
-  margin: 0 $xs-size;
-  padding: 0.5rem $s-size;
-  width: 5rem;
+  height: $xxl-size;
+  margin: 0 $xxs-size;
+  padding: 0.5rem $xs-size;
+  width: $xxl-size;
 }
 
 button:hover {
@@ -24,13 +25,17 @@ button:active {
 
 .timer-button {
   margin: 0 $s-size;
+  height: initial;
   padding: $m-size;
-  width: 15rem;
+  width: 14rem;
 }
 
 @media only screen and (min-width: $desktop-breakpoint) {
   button {
     font-size: $l-size;
+    height: initial;
+    margin: 0 $s-size;
+    padding: 0.5rem $s-size;
     width: 6rem;
   }
 
