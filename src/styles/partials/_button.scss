@@ -24,10 +24,10 @@ button:active {
 }
 
 .timer-button {
-  margin: 0 $s-size;
+  margin: 0 $xs-size;
   height: initial;
   padding: $m-size;
-  width: 14rem;
+  width: 12.5rem;
 }
 
 @media only screen and (min-width: $desktop-breakpoint) {
