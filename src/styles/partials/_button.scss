@@ -23,8 +23,12 @@ button:active {
   transform: scale(0.98);
 }
 
+.timer-buttons {
+  margin: 0;
+}
+
 .timer-button {
-  margin: 0 $xs-size;
+  margin: 0 $s-size;
   height: initial;
   padding: $m-size;
   width: 12.5rem;
